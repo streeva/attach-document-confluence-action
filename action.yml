@@ -27,7 +27,7 @@ inputs:
     required: true
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/streeva/attach-document-confluence:v1.0.0'
+  image: 'docker://ghcr.io/streeva/attach-document-confluence:v1.0.1'
   args:
     - ${{ inputs.domain }}
     - ${{ inputs.spacekey }}

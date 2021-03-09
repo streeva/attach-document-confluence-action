@@ -29,7 +29,7 @@ PAGE_ID=$( echo $SEARCHRESULTS | jq -r .results[].id)
 echo Located page with $PAGE_ID
 
 ATTACHMENTS=$(curl -s \
-  --url 'https://'$DOMAIN'.atlassian.net/wiki/rest/api/content/'$PAGE_ID'/child/attachment?filename='$ATTACHMENT_NAME'.html&expand=version' \
+  --url 'https://'$DOMAIN'.atlassian.net/wiki/rest/api/content/'$PAGE_ID'/child/attachment?filename='$ATTACHMENT_NAME'&expand=version' \
   --header "Authorization: Bearer $ACCESS_TOKEN" \
   --header 'Accept: application/json')
 
@@ -43,7 +43,7 @@ then
     --url 'https://'$DOMAIN'.atlassian.net/wiki/rest/api/content/'$PAGE_ID'/child/attachment' \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     -H "X-Atlassian-Token: no-check" \
-    -F "file=@$SOURCE_FILE;filename=$ATTACHMENT_NAME.html"
+    -F "file=@$SOURCE_FILE;filename=$ATTACHMENT_NAME"
 else
   # update/replace
   echo "Existing attachment found"
@@ -51,5 +51,5 @@ else
   curl -s --request POST --url "$URL" \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     -H "X-Atlassian-Token: nocheck" \
-    -F "file=@$SOURCE_FILE;filename=$ATTACHMENT_NAME.html"
+    -F "file=@$SOURCE_FILE;filename=$ATTACHMENT_NAME"
 fi
