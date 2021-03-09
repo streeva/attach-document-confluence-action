@@ -1,0 +1,39 @@
+name: 'Attach document to Confluence'
+description: 'Attach a document to a named Confluence page'
+inputs:
+  domain:
+    description: 'Your Atlassian domain'
+    required: true
+  spacekey:
+    description: 'Space key where page is located'
+    required: true
+  pageheading:
+    description: 'Title of the Confluence page to attach the document to'
+    required: true
+  destinationname:
+    description: 'The filename to attach the document with'
+    required: true
+  sourcename:
+    description: 'The filename of the local file to attach'
+    required: true
+  clientid:
+    description: 'Atlassian OAuth2 app client id'
+    required: true
+  clientsecret:
+    description: 'Atlassian OAuth2 app client secret'
+    required: true
+  refreshtoken:
+    description: 'Atlassian OAuth2 refresh token received from authorisation process'
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/streeva/attach-document-confluence:v1.0.0'
+  args:
+    - ${{ inputs.domain }}
+    - ${{ inputs.spacekey }}
+    - ${{ inputs.pageheading }}
+    - ${{ inputs.destinationname }}
+    - ${{ inputs.sourcename }}
+    - ${{ inputs.clientid }}
+    - ${{ inputs.clientsecret }}
+    - ${{ inputs.refreshtoken }}
