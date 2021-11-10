@@ -13,10 +13,14 @@ CLIENTID=$6
 CLIENTSECRET=$7
 REFRESH_TOKEN=$8
 
-ACCESS_TOKEN=$(curl -s --request POST \
+TOKEN_RESPONSE=$(curl -s --request POST \
   --url 'https://auth.atlassian.com/oauth/token' \
   --header 'Content-Type: application/json' \
-  --data '{ "grant_type": "refresh_token", "client_id": "'$CLIENTID'", "client_secret": "'$CLIENTSECRET'", "refresh_token": "'$REFRESH_TOKEN'" }' | jq -r .access_token)
+  --data '{ "grant_type": "refresh_token", "client_id": "'$CLIENTID'", "client_secret": "'$CLIENTSECRET'", "refresh_token": "'$REFRESH_TOKEN'" }')
+
+ACCESS_TOKEN=$(echo $TOKEN_RESPONSE | jq -r .access_token)
+REFRESH_TOKEN=$(echo $TOKEN_RESPONSE | jq -r .refresh_token)
+echo "::set-output name=updatedrefreshtoken::$REFRESH_TOKEN"
 
 CQL='cql=title="'$PAGEHEADING'" and Space='$SPACEKEY
 SEARCHRESULTS=$(curl -s -G --url 'https://'$DOMAIN'.atlassian.net/wiki/rest/api/content/search' \

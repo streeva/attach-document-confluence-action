@@ -25,6 +25,9 @@ inputs:
   refreshtoken:
     description: 'Atlassian OAuth2 refresh token received from authorisation process'
     required: true
+outputs:
+  updatedrefreshtoken:
+    description: 'New refresh token returned from the auth process'
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/streeva/attach-document-confluence:v1.0.1'
