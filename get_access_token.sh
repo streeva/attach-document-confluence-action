@@ -21,7 +21,7 @@ urlencode() {
 }
 
 echo "Copy the following URL and visit using your browser:"
-echo "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=$CLIENTID&scope=read%3Aconfluence-content.summary%20write%3Aconfluence-file%20offline_access&redirect_uri=$(urlencode $REDIRECTURL)%2F153d3ee9-701f-4ce7-b271-79d03d5ee0d3&state=1234&response_type=code&prompt=consent"
+echo "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=$CLIENTID&scope=read%3Aconfluence-content.summary%20write%3Aconfluence-file%20offline_access&redirect_uri=$(urlencode $REDIRECTURL)&state=1234&response_type=code&prompt=consent"
 echo "Follow the auth flow to grant your app the access it needs, and when redirected copy the parameter value for code and enter it below"
 
 read -p "Enter code: "  CODE
