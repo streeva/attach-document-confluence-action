@@ -16,27 +16,20 @@ inputs:
   sourcename:
     description: 'The filename of the local file to attach'
     required: true
-  clientid:
-    description: 'Atlassian OAuth2 app client id'
+  email:
+    description: 'Email address of user owning the API token used to access confluence API'
     required: true
-  clientsecret:
-    description: 'Atlassian OAuth2 app client secret'
+  token:
+    description: 'Confluence API token to use accessing Confluence API'
     required: true
-  refreshtoken:
-    description: 'Atlassian OAuth2 refresh token received from authorisation process'
-    required: true
-outputs:
-  updatedrefreshtoken:
-    description: 'New refresh token returned from the auth process'
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/streeva/attach-document-confluence:v1.0.1'
+  image: 'docker://ghcr.io/streeva/attach-document-confluence:v2.0.0'
   args:
     - ${{ inputs.domain }}
     - ${{ inputs.spacekey }}
     - ${{ inputs.pageheading }}
     - ${{ inputs.destinationname }}
     - ${{ inputs.sourcename }}
-    - ${{ inputs.clientid }}
-    - ${{ inputs.clientsecret }}
-    - ${{ inputs.refreshtoken }}
+    - ${{ inputs.email }}
+    - ${{ inputs.token }}
